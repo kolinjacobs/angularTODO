@@ -1,0 +1,34 @@
+
+
+<div *ngIf="appState == 'default' ">
+  <h3>Add todos</h3>
+  <!-- creates an event handler and calls the addTodo function
+  that is inside of the odos.component.ts -->
+  <form (submit)="addTodo()">
+    <!-- ng model is for two way data binding with the text variable that is inside of todo.service.ts -->
+      <input class="form-control" type="text" [(ngModel)]="text" [ngModelOptions]="{standalone: true}">
+      <button class="btn btn-lg btn-block submit-btn" type="submit">Submit</button>
+  </form>
+</div>
+<div *ngIf="appState == 'edit' ">
+  <h3>Add todos</h3>
+  <form (submit)="updateTodo()">
+    <!-- ng model is for two way data binding with the text variable that is inside of todo.service.ts -->
+      <input class="form-control" type="text" [(ngModel)]="text" [ngModelOptions]="{standalone: true}">
+      <button class="btn btn-lg btn-block submit-btn" type="submit">Edit</button>
+  </form>
+</div>
+
+
+<h3>Todo List</h3>
+<ul class="list-group">
+  <!-- this is a for each loop that loops through the
+  todos array that is inside of todos.component.ts -->
+  <li class="list-group-item justify-content-between clearfix" *ngFor="let todo of todos" (click)="editTodo(todo)">
+    <!-- gets the text object from todo -->
+    <span class="pull-left" >
+      {{todo.text}}
+    </span>
+      <button class="btn btn-danger pull-right btn-xs"  (click)="deleteTodo(todo.text)">x</button>
+  </li>
+</ul>
